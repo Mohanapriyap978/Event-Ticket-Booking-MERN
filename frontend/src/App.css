@@ -1,7 +1,7 @@
 
-/* =================================
+/* =========================================
    EVENTEASE - GLOBAL STYLING
-================================= */
+========================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
@@ -17,15 +17,25 @@ body {
   color: #20243a;
 }
 
-button {
+button,
+input,
+select {
   font-family: inherit;
+}
+
+button {
   cursor: pointer;
   border: none;
 }
 
-/* =================================
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* =========================================
    NAVBAR
-================================= */
+========================================= */
 
 .navbar {
   height: 75px;
@@ -91,13 +101,18 @@ button {
   font-weight: 600;
 }
 
-/* =================================
-   SIDEBAR
-================================= */
+/* =========================================
+   APP LAYOUT
+========================================= */
 
 .app-layout {
   display: flex;
+  min-height: calc(100vh - 75px);
 }
+
+/* =========================================
+   SIDEBAR
+========================================= */
 
 .sidebar {
   width: 245px;
@@ -146,9 +161,9 @@ button {
   cursor: pointer;
 }
 
-/* =================================
+/* =========================================
    DASHBOARD
-================================= */
+========================================= */
 
 .dashboard {
   flex: 1;
@@ -156,9 +171,9 @@ button {
   padding: 30px;
 }
 
-/* =================================
+/* =========================================
    SYSTEM BANNER
-================================= */
+========================================= */
 
 .system-banner {
   background: linear-gradient(120deg, #34266f, #6854df);
@@ -188,6 +203,7 @@ button {
 .system-banner h3 {
   font-size: 21px;
   margin-bottom: 7px;
+  color: white;
 }
 
 .system-banner p {
@@ -222,9 +238,9 @@ button {
   gap: 9px;
 }
 
-/* =================================
+/* =========================================
    PAGE HEADING
-================================= */
+========================================= */
 
 .page-heading,
 .section-heading {
@@ -238,12 +254,13 @@ button {
 .page-heading h1 {
   font-size: 25px;
   margin-bottom: 8px;
+  color: #172033;
 }
 
 .page-heading p,
 .section-heading p {
   font-size: 13px;
-  color: #88899a;
+  color: #718096;
 }
 
 .create-button {
@@ -259,9 +276,9 @@ button {
   background: #4936c0;
 }
 
-/* =================================
+/* =========================================
    STATISTICS CARDS
-================================= */
+========================================= */
 
 .stats-grid {
   display: grid;
@@ -292,22 +309,25 @@ button {
 }
 
 .stat-card p {
-  color: #898a9a;
+  color: #718096;
   font-size: 12px;
   margin-bottom: 9px;
 }
 
 .stat-card h2 {
   font-size: 24px;
+  color: #172033;
+  font-weight: 700;
 }
 
-/* =================================
+/* =========================================
    UPCOMING EVENTS
-================================= */
+========================================= */
 
 .section-heading h2 {
   font-size: 19px;
   margin-bottom: 7px;
+  color: #172033;
 }
 
 .section-heading span {
@@ -319,7 +339,7 @@ button {
 
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -359,11 +379,12 @@ button {
 .event-card h3 {
   font-size: 16px;
   margin-bottom: 9px;
+  color: #20243a;
 }
 
 .event-description {
   font-size: 12px;
-  color: #9293a1;
+  color: #718096;
   line-height: 1.7;
   min-height: 40px;
 }
@@ -397,9 +418,224 @@ button {
   font-size: 11px;
 }
 
-/* =================================
+/* =========================================
+   EVENT SEARCH AND FILTER
+========================================= */
+
+.event-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.event-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1px solid #e8e7f0;
+  padding: 12px 15px;
+  border-radius: 10px;
+  flex: 1;
+  color: #6551d5;
+}
+
+.event-search input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+  background: transparent;
+}
+
+.event-filters select {
+  background: white;
+  border: 1px solid #e8e7f0;
+  border-radius: 10px;
+  padding: 12px;
+  color: #5542d8;
+  outline: none;
+}
+
+.no-events {
+  color: #718096;
+  padding: 25px;
+}
+
+/* =========================================
+   BOOK TICKETS
+========================================= */
+
+.book-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  background: #6551d5;
+  color: white;
+  border-radius: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.book-button:hover {
+  background: #4936c0;
+}
+
+.booking-panel {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f5f3ff;
+  border-radius: 12px;
+}
+
+.booking-panel h4 {
+  margin-bottom: 14px;
+  color: #34266f;
+}
+
+.booking-panel label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.booking-panel input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd5ff;
+  border-radius: 8px;
+  outline: none;
+}
+
+.booking-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.booking-total strong {
+  color: #5744d0;
+}
+
+.confirm-button {
+  width: 100%;
+  padding: 12px;
+  background: #34266f;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.confirm-button:hover {
+  background: #4936a0;
+}
+
+/* =========================================
+   MY BOOKINGS PAGE
+========================================= */
+
+.booking-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.booking-card {
+  background: white;
+  border: 1px solid #eeeef4;
+  border-radius: 15px;
+  padding: 23px;
+  transition: 0.2s;
+}
+
+.booking-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px #29205b10;
+}
+
+.booking-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #6551d5;
+  margin-bottom: 20px;
+}
+
+.confirmed {
+  background: #e5fff0;
+  color: #159957;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.booking-card h3 {
+  margin-bottom: 8px;
+  color: #20243a;
+  font-size: 17px;
+}
+
+.booking-card p {
+  color: #888;
+  font-size: 12px;
+}
+
+.booking-info {
+  display: grid;
+  gap: 13px;
+  margin: 20px 0;
+  color: #77798b;
+  font-size: 13px;
+}
+
+.booking-info span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.booking-summary {
+  border-top: 1px solid #eeeef4;
+  padding: 17px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #77798b;
+  font-size: 13px;
+}
+
+.booking-summary strong {
+  color: #6551d5;
+  font-size: 18px;
+}
+
+.download-button {
+  width: 100%;
+  padding: 12px;
+  background: #eeeaff;
+  color: #6551d5;
+  border-radius: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.download-button:hover {
+  background: #ded7ff;
+}
+
+/* =========================================
    RESPONSIVE DESIGN
-================================= */
+========================================= */
 
 @media (max-width: 1100px) {
   .stats-grid {
@@ -407,7 +643,11 @@ button {
   }
 
   .events-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking-list {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -464,6 +704,10 @@ button {
     padding: 11px;
     font-size: 11px;
   }
+
+  .event-filters {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 420px) {
@@ -479,27 +723,23 @@ button {
     align-items: flex-start;
     flex-direction: column;
   }
+
+  .banner-time {
+    font-size: 11px;
+  }
+
+  .event-card {
+    padding: 16px;
+  }
+
+  .booking-card {
+    padding: 17px;
+  }
 }
 
-/* Dashboard text visibility fix */
-.page-heading h1,
-.section-heading h2 {
-  color: #172033 !important;
-}
-
-.stat-card h2 {
-  color: #172033 !important;
-  font-weight: 700;
-}
-
-.stat-card p,
-.page-heading p,
-.section-heading p {
-  color: #718096;
-}
-
-
-/* FINAL EVENTEASE TEXT VISIBILITY FIX */
+/* =========================================
+   FINAL TEXT VISIBILITY FIX
+========================================= */
 
 .page-heading h1,
 .section-heading h2,
@@ -522,53 +762,4 @@ button {
 
 .event-description {
   color: #718096 !important;
-}
-
-
-/* EVENT DISCOVERY FILTERS */
-
-.event-filters {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 22px;
-}
-
-.event-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  border: 1px solid #e8e7f0;
-  padding: 12px 15px;
-  border-radius: 10px;
-  flex: 1;
-  color: #6551d5;
-}
-
-.event-search input {
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: 13px;
-  background: transparent;
-}
-
-.event-filters select {
-  background: white;
-  border: 1px solid #e8e7f0;
-  border-radius: 10px;
-  padding: 12px;
-  color: #5542d8;
-  outline: none;
-}
-
-.no-events {
-  color: #718096;
-  padding: 25px;
-}
-
-@media (max-width: 600px) {
-  .event-filters {
-    flex-direction: column;
-  }
 }
