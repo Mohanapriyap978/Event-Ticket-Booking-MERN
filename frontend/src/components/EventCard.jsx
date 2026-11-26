@@ -5,14 +5,38 @@ import {
   CalendarDays,
   MapPin,
   ArrowUpRight,
-  Ticket
+  Ticket,
+  CheckCircle
 } from "lucide-react";
 
+import { useBookings } from "../context/BookingContext";
+
 function EventCard({ event }) {
+
   const [showBooking, setShowBooking] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+
+  const { addBooking } = useBookings();
 
   const totalPrice = event.price * quantity;
+
+  const handleBooking = () => {
+
+    if (
+      quantity < 1 ||
+      quantity > event.available
+    ) {
+      alert("Please select a valid ticket quantity.");
+      return;
+    }
+
+    addBooking(event, quantity);
+
+    setBookingSuccess(true);
+    setShowBooking(false);
+    setQuantity(1);
+  };
 
   return (
     <div className="event-card">
@@ -21,6 +45,7 @@ function EventCard({ event }) {
         <span className="event-category">
           {event.category}
         </span>
+
         <ArrowUpRight size={19} />
       </div>
 
@@ -31,6 +56,7 @@ function EventCard({ event }) {
       </p>
 
       <div className="event-details">
+
         <span>
           <CalendarDays size={16} />
           {event.date}
@@ -40,6 +66,7 @@ function EventCard({ event }) {
           <MapPin size={16} />
           {event.location}
         </span>
+
       </div>
 
       <div className="event-footer">
@@ -47,15 +74,27 @@ function EventCard({ event }) {
         <span>{event.available} tickets left</span>
       </div>
 
+      {bookingSuccess && (
+        <div className="booking-success">
+          <CheckCircle size={17} />
+          Booking added successfully!
+        </div>
+      )}
+
       <button
         className="book-button"
-        onClick={() => setShowBooking(!showBooking)}
+        onClick={() => {
+          setShowBooking(!showBooking);
+          setBookingSuccess(false);
+        }}
       >
         <Ticket size={17} />
+
         {showBooking ? "Close Booking" : "Book Tickets"}
       </button>
 
       {showBooking && (
+
         <div className="booking-panel">
 
           <h4>Book Your Tickets</h4>
@@ -70,7 +109,11 @@ function EventCard({ event }) {
             onChange={(e) => {
               const value = Number(e.target.value);
 
-              if (value >= 1 && value <= event.available) {
+              if (
+                Number.isInteger(value) &&
+                value >= 1 &&
+                value <= event.available
+              ) {
                 setQuantity(value);
               }
             }}
@@ -83,14 +126,13 @@ function EventCard({ event }) {
 
           <button
             className="confirm-button"
-            onClick={() => alert(
-              `Booking preview: ${quantity} ticket(s) for ${event.title}. Total: ₹${totalPrice}`
-            )}
+            onClick={handleBooking}
           >
             Confirm Booking
           </button>
 
         </div>
+
       )}
 
     </div>

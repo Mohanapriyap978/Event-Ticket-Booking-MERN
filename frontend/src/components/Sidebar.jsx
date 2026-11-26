@@ -1,6 +1,8 @@
 
 import React from "react";
 
+import { NavLink } from "react-router-dom";
+
 import {
   LayoutDashboard,
   CalendarDays,
@@ -12,12 +14,36 @@ import {
 } from "lucide-react";
 
 const menuItems = [
-  { name: "Dashboard", icon: LayoutDashboard },
-  { name: "Explore Events", icon: CalendarDays },
-  { name: "My Bookings", icon: Ticket },
-  { name: "Organizers", icon: Users },
-  { name: "Analytics", icon: BarChart3 },
-  { name: "Settings", icon: Settings }
+  {
+    name: "Dashboard",
+    icon: LayoutDashboard,
+    path: "/dashboard"
+  },
+  {
+    name: "Explore Events",
+    icon: CalendarDays,
+    path: "/explore"
+  },
+  {
+    name: "My Bookings",
+    icon: Ticket,
+    path: "/bookings"
+  },
+  {
+    name: "Organizers",
+    icon: Users,
+    path: "/organizers"
+  },
+  {
+    name: "Analytics",
+    icon: BarChart3,
+    path: "/analytics"
+  },
+  {
+    name: "Settings",
+    icon: Settings,
+    path: "/settings"
+  }
 ];
 
 function Sidebar() {
@@ -26,23 +52,27 @@ function Sidebar() {
 
       <p className="menu-heading">WORKSPACE</p>
 
-      {menuItems.map((item, index) => {
+      {menuItems.map((item) => {
         const Icon = item.icon;
 
         return (
-          <div
-            className={`sidebar-item ${
-              index === 0 ? "active" : ""
-            }`}
+          <NavLink
+            to={item.path}
             key={item.name}
+            className={({ isActive }) =>
+              `sidebar-item ${isActive ? "active" : ""}`
+            }
           >
             <Icon size={19} />
             <span>{item.name}</span>
-          </div>
+          </NavLink>
         );
       })}
 
-      <div className="sidebar-bottom">
+      <div
+        className="sidebar-bottom"
+        onClick={() => alert("Logout functionality coming soon!")}
+      >
         <LogOut size={19} />
         <span>Logout</span>
       </div>

@@ -1,5 +1,6 @@
 
 import React from "react";
+
 import {
   Ticket,
   CalendarDays,
@@ -7,31 +8,14 @@ import {
   Download
 } from "lucide-react";
 
+import { useBookings } from "../context/BookingContext";
+
 function MyBookings() {
 
-  const bookings = [
-    {
-      id: "EVT001",
-      event: "Tech Innovation Summit",
-      date: "12 Dec 2026",
-      location: "Coimbatore",
-      tickets: 2,
-      amount: 998,
-      status: "Confirmed"
-    },
-    {
-      id: "EVT002",
-      event: "Music Fest 2026",
-      date: "18 Dec 2026",
-      location: "Chennai",
-      tickets: 1,
-      amount: 799,
-      status: "Confirmed"
-    }
-  ];
+  const { bookings } = useBookings();
 
   return (
-    <div className="dashboard">
+    <main className="dashboard">
 
       <div className="page-heading">
         <div>
@@ -59,15 +43,17 @@ function MyBookings() {
             <p>Booking ID: {booking.id}</p>
 
             <div className="booking-info">
+
               <span>
-                <CalendarDays size={16}/>
+                <CalendarDays size={16} />
                 {booking.date}
               </span>
 
               <span>
-                <MapPin size={16}/>
+                <MapPin size={16} />
                 {booking.location}
               </span>
+
             </div>
 
             <div className="booking-summary">
@@ -75,8 +61,13 @@ function MyBookings() {
               <strong>₹{booking.amount}</strong>
             </div>
 
-            <button className="download-button">
-              <Download size={16}/>
+            <button
+              className="download-button"
+              onClick={() => alert(
+                `Ticket: ${booking.event}\nBooking ID: ${booking.id}`
+              )}
+            >
+              <Download size={16} />
               Download Ticket
             </button>
 
@@ -86,7 +77,11 @@ function MyBookings() {
 
       </div>
 
-    </div>
+      {bookings.length === 0 && (
+        <p>No bookings available yet.</p>
+      )}
+
+    </main>
   );
 }
 
