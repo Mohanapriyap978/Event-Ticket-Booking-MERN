@@ -497,3 +497,29 @@ button {
 .section-heading p {
   color: #718096;
 }
+
+
+/* FINAL EVENTEASE TEXT VISIBILITY FIX */
+
+.page-heading h1,
+.section-heading h2,
+.stat-card h2 {
+  color: #20243a !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #20243a !important;
+}
+
+.stat-card p,
+.page-heading p,
+.section-heading p {
+  color: #718096 !important;
+  opacity: 1 !important;
+}
+
+.event-card h3 {
+  color: #20243a !important;
+}
+
+.event-description {
+  color: #718096 !important;
+}
