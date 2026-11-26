@@ -1,11 +1,12 @@
 
-import React from "react";
+import React, { useState } from "react";
 
 import {
   CalendarDays,
   Ticket,
   Users,
-  IndianRupee
+  IndianRupee,
+  Search
 } from "lucide-react";
 
 import SystemBanner from "../components/SystemBanner";
@@ -49,6 +50,19 @@ const stats = [
 ];
 
 function Dashboard() {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
+
+  const filteredEvents = events.filter((event) => {
+    const matchesSearch =
+      event.title.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory =
+      category === "All" || event.category === category;
+
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <main className="dashboard">
 
@@ -74,7 +88,6 @@ function Dashboard() {
               <div className="stat-icon">
                 <Icon size={22} />
               </div>
-
               <p>{stat.label}</p>
               <h2>{stat.value}</h2>
             </div>
@@ -87,17 +100,43 @@ function Dashboard() {
           <h2>Upcoming Events</h2>
           <p>Explore what's happening next.</p>
         </div>
+      </div>
 
-        <span>View all →</span>
+      <div className="event-filters">
+
+        <div className="event-search">
+          <Search size={18} />
+
+          <input
+            type="text"
+            placeholder="Search your favourite events..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="All">All Categories</option>
+          <option value="Technology">Technology</option>
+          <option value="Music">Music</option>
+          <option value="Business">Business</option>
+        </select>
+
       </div>
 
       <div className="events-grid">
-        {events.map((event) => (
-          <EventCard
-            key={event.title}
-            event={event}
-          />
-        ))}
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((event) => (
+            <EventCard key={event.title} event={event} />
+          ))
+        ) : (
+          <p className="no-events">
+            No events found. Try another search!
+          </p>
+        )}
       </div>
 
     </main>

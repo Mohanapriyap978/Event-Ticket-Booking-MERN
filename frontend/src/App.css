@@ -523,3 +523,52 @@ button {
 .event-description {
   color: #718096 !important;
 }
+
+
+/* EVENT DISCOVERY FILTERS */
+
+.event-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.event-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1px solid #e8e7f0;
+  padding: 12px 15px;
+  border-radius: 10px;
+  flex: 1;
+  color: #6551d5;
+}
+
+.event-search input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+  background: transparent;
+}
+
+.event-filters select {
+  background: white;
+  border: 1px solid #e8e7f0;
+  border-radius: 10px;
+  padding: 12px;
+  color: #5542d8;
+  outline: none;
+}
+
+.no-events {
+  color: #718096;
+  padding: 25px;
+}
+
+@media (max-width: 600px) {
+  .event-filters {
+    flex-direction: column;
+  }
+}
