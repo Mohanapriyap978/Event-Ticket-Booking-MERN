@@ -1,7 +1,7 @@
 
 import React from "react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
   LayoutDashboard,
@@ -10,7 +10,8 @@ import {
   Users,
   BarChart3,
   Settings,
-  LogOut
+  LogOut,
+  UserCircle
 } from "lucide-react";
 
 const menuItems = [
@@ -47,32 +48,52 @@ const menuItems = [
 ];
 
 function Sidebar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("eventease_current_user");
+    navigate("/signin");
+  };
+
   return (
     <aside className="sidebar">
 
+      <div className="sidebar-profile">
+        <UserCircle size={35} />
+        <div>
+          <h4>Welcome User</h4>
+          <p>EventEase Member</p>
+        </div>
+      </div>
+
       <p className="menu-heading">WORKSPACE</p>
 
-      {menuItems.map((item) => {
-        const Icon = item.icon;
+      <nav className="sidebar-menu">
 
-        return (
-          <NavLink
-            to={item.path}
-            key={item.name}
-            className={({ isActive }) =>
-              `sidebar-item ${isActive ? "active" : ""}`
-            }
-          >
-            <Icon size={19} />
-            <span>{item.name}</span>
-          </NavLink>
-        );
-      })}
+        {menuItems.map((item) => {
 
-      <div
-        className="sidebar-bottom"
-        onClick={() => alert("Logout functionality coming soon!")}
-      >
+          const Icon = item.icon;
+
+          return (
+            <NavLink
+              to={item.path}
+              key={item.name}
+              className={({ isActive }) =>
+                `sidebar-item ${isActive ? "active" : ""}`
+              }
+            >
+              <Icon size={19} />
+              <span>{item.name}</span>
+            </NavLink>
+
+          );
+
+        })}
+
+      </nav>
+
+      <div className="sidebar-bottom" onClick={handleLogout}>
         <LogOut size={19} />
         <span>Logout</span>
       </div>
